@@ -1,4 +1,8 @@
-<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px; ">
+<?php
+include 'partials/_login.php';
+include 'partials/_signup.php';
+echo '<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;
+height:100%; ">
     <a href="index.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
         <span width="40" height="32" class="fs-4 me-2 ">Career Buddy </span>
     </a>
@@ -25,9 +29,10 @@
             </a>
         </li>
         <li>
-            <a href="news.php" class="nav-link text-white">
-                News
-            </a>
+        <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
         </li>
     </ul>
     <hr>
@@ -38,8 +43,11 @@
             <strong>Login</strong>
         </a>
         <ul class="dropdown-menu dropdown-menu-dark text-small shadow " aria-labelledby=" dropdownUser1">
-            <li><a class="dropdown-item" href="#">login</a></li>
-            <li><a class="dropdown-item" href="#">Sign Up</a></li>
+            <li> <button class="btn btn-outline-dark ml-4 text-white" style="margin-left:7px;" data-bs-toggle="modal"
+                    data-bs-target="#loginModal" type="submit">Login</button>
+
+            <button class="btn btn-outline-dark ml-2 text-white" data-bs-toggle="modal"
+                    data-bs-target="#SignupModal" type="submit">SignUp</button>
             <li>
                 <hr class="dropdown-divider">
             </li>
@@ -47,5 +55,5 @@
         </ul>
     </div>
 </div>
-
-<div class="b-example-divider"></div>
+<div class="b-example-divider"></div>';
+?>

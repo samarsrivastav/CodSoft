@@ -9,13 +9,13 @@
     <meta name="generator" content="Hugo 0.84.0">
     <title>Career Buddy</title>
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sidebars/">
+    <!-- <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sidebars/"> -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 
     <!-- Bootstrap core CSS -->
-    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -37,19 +37,26 @@
 
 
     <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="sidebars.css">
+    <link rel="stylesheet" href="partials/sidebars.css">
 </head>
 
 <body>
-    <main>
+    <main style="max-width: 100%;">
 
-        <?php
-
-    include 'partials/_sidebar.php';
-    ?>
-        <div class="container my-3">
+        <div class="sidebar" style="
+            height:100%; 
+            position:fixed;
+            top: 0;
+            left: 0; ">
+            <?php
+            include 'partials/_sidebar.php';
+            ?>
+        </div>
+        <div class="container my-2" style=" width: 70%;
+            position: absolute;
+            margin: 308px;">
             <!-- corousal -->
-            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+            <div id=" carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <img src="img/c-img.jpg" class="d-block w-100" alt="...">
