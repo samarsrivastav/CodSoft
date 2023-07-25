@@ -33,6 +33,10 @@
             font-size: 3.5rem;
         }
     }
+
+    .modal-backdrop {
+        z-index: -1;
+    }
     </style>
 
 
@@ -40,7 +44,7 @@
     <link rel="stylesheet" href="partials/sidebars.css">
 </head>
 
-<body>
+<body style="background-color:rgb(219 218 218);">
     <main style="max-width: 100%;">
 
         <div class="sidebar" style="
@@ -54,7 +58,7 @@
         </div>
         <div class="container my-2" style=" width: 70%;
             position: absolute;
-            margin: 308px;">
+            margin: 308px; z-index: -1;">
             <!-- corousal -->
             <div id=" carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">

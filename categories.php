@@ -38,6 +38,10 @@ include 'partials/_dbconnect.php';
             font-size: 3.5rem;
         }
     }
+
+    .modal-backdrop {
+        z-index: -1;
+    }
     </style>
 
 
@@ -46,9 +50,10 @@ include 'partials/_dbconnect.php';
 </head>
 
 <body>
-    <main style="max-width: 100%;">
+    <main style=" max-width: 100%;">
 
         <div class="sidebar" style="
+        z-index:2;
             height:100%; 
             position:fixed;
             top: 0;
@@ -57,7 +62,7 @@ include 'partials/_dbconnect.php';
             include 'partials/_sidebar.php';
             ?>
         </div>
-        <div class="container-1  my-4" style="position:absolute; margin-left:300px;">
+        <div class="container-1  my-4" style=" display:flex;position:absolute; margin-left:300px;">
             <!-- cards -->
             <?php
                 $sql = "SELECT * FROM `categories`";
@@ -66,12 +71,12 @@ include 'partials/_dbconnect.php';
                     $title = $row['cat_title'];
                     $id = $row['cat_id'];
                     $desc = $row['cat_desc'];
-                    echo ' <div class=" my-2 col-md-4">
-           <div class=" card my-2 " style="width: 18rem;">
-               <img src="https://source.unsplash.com/500x400/?job,' . $title . '" class="card-img-top" alt="...">
+                    echo '<div class=" my-2 col-md-4" style="margin:25px;"> 
+           <div class=" card my-2 " style="width: 16rem;">
+               <img src="https://source.unsplash.com/400x300/?job,' . $title . '" class="card-img-top" alt="...">
                <div class="card-body ">
                    <h5 class="card-title"><a style="text-decoration:none; " class="text-dark" href="threads.php?catid=' . $id . '">' . $title . '</a></h5>
-                   <p class="card-text">' . substr($row['cat_desc'], 0, 60) . '....</p>
+                   <p class="card-text">' . substr($row['cat_desc'], 0, 40) . '....</p>
                    <a href="thread.php?catid=' . $id . '" class="btn btn-success">Read More</a>
                </div>
            </div>
@@ -80,9 +85,7 @@ include 'partials/_dbconnect.php';
                 ?>
             <!-- card end -->
         </div>
-        <div class="Heading" style="position:fixed; right:15%;top:30%;">
-            <h1 style="font-size:5rem;font-family:">Categories</h1>
-        </div>
+
     </main>
     <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">

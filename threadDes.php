@@ -56,29 +56,27 @@
             ?>
         </div>
 
-        <div class=" container-1 my-2" style="position:absolute;margin:300px;">
+        <div class=" container-1 my-2" style="z-index: -1;position:absolute;margin:300px;">
             <?php
-            $id = $_GET['catid'];
-            $sql = "Select *from categories where cat_id='$id'";
+            $id = $_GET['threadid'];
+            $sql = "Select *from threads where thread_id='$id'";
             $result = mysqli_query($conn, $sql);
             while ($row = mysqli_fetch_assoc($result)) {
-                $title = $row['cat_title'];
-                $desc = $row['cat_desc'];
+                $title = $row['thread_title'];
+                $desc = $row['thread_desc'];
+                $user = $row['username'];
             }
             echo ' 
-            <div class="header" style="z-index: -1;">
+            <div class="header">
                 <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-root-margin="0px 0px -40%"
                     data-bs-smooth-scroll="true" class="scrollspy-example bg-light my-3 p-3 rounded-2" tabindex="0" style="border:7px solid black;">
-                    <h2 id="scrollspyHeading1">Welcome to
-                        ' . $title . ' Discussion
+                    <h2 id="scrollspyHeading1">
+                        ' . $title . ' 
                     </h2>
                     <p>
                        ' . $desc . '
                     </p>
-                    <h3>Forum Rules</h3>
-                    <p>Keep it friendly.</p>
-                    <p>Stay on topic. </p>
-                    <p> Refrain from demeaning, discriminatory, or harassing behaviour and speech.</p>
+                    <br><br>by:<strong>' . $user . '</strong>
                 </div>
             </div>
                     ';
@@ -86,60 +84,52 @@
             <div class="threads my-5">
                 <h2>Discussion </h2>
                 <?php
-                $cid = $_GET['catid'];
-                $sql = "SELECT * FROM `threads` where cat_id=$cid";
+                $tid = $_GET['threadid'];
+                $sql = "SELECT * FROM `comment` where thread_id=$tid";
                 $result = mysqli_query($conn, $sql);
                 $num = mysqli_num_rows($result);
                 if ($num > 0) {
                     while ($row = mysqli_fetch_assoc($result)) {
-                        $id = $row['thread_id'];
+                        $id = $row['comment_id'];
                         $user = $row['username'];
-                        $time = $row['thread_time'];
-                        $desc = $row['thread_desc'];
-                        $title = $row['thread_title'];
+                        $time = $row['comment_time'];
+                        $desc = $row['comment'];
 
                         echo
                             '<div class="d-flex my-3">
-                         <div class="flex-shrink-0">
-                             <i class="fa-solid fa-user rounded-circle me-2" width="60" height="60"></i>
-                         </div>
-                         <div class=" flex-grow-1 ms-3">
-                             <h4><a href="threadDes.php?threadid=' . $id . '" style="text-decoration:none; "
-                                     class="text-dark">' . $user . ' </a> </h4>at ' . $time . ' <br><strong>' . $title . '</strong> <br>
-                             ' . $desc . '<br>
-                         </div>
-                     </div>
-                     <br>';
+                    <div class="flex-shrink-0">
+                        <i class="fa-solid fa-user rounded-circle me-2" width="60" height="60"></i>
+                    </div>
+                    <div class=" flex-grow-1 ms-3">
+                        <h4>' . $user . ' </h4> at ' . $time . ' <br>
+                        ' . $desc . '<br>
+                    </div>
+                </div>
+                <br>
+                ';
                     }
                 } else if ($num == 0) {
                     echo '<div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-root-margin="0px 0px -40%"
-                    data-bs-smooth-scroll="true" class="scrollspy-example bg-light my-3 p-3 rounded-2" tabindex="0">Be the First One to Raise a Query</div>';
+            data-bs-smooth-scroll="true" class="scrollspy-example bg-light my-3 p-3 rounded-2" tabindex="0">Be the First One to Start the Discussion</div>';
                 }
                 ?>
             </div>
 
-            <div class="queryform my-5">
-                <h2>Ask Your Queries here</h2>
+            <div class="queryform my-5" style="z-index:2">
+                <h2>Answer the following query</h2>
                 <?php
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    $catid = $_GET['catid'];
-                    $title = $_POST['doubt_title'];
-                    $desc = $_POST['doubt_desc'];
-                    $sql = "INSERT INTO `threads` ( `username`, `thread_title`, `thread_desc`,`cat_id`,`thread_time`) VALUES ( 'JOJO', '$title', '$desc','$catid', current_timestamp());";
+                    $id = $_GET['threadid'];
+                    $comment = $_POST['comment'];
+                    $user = "sukuna";
+                    $sql = "INSERT INTO `comment` (`username`, `comment`, `thread_id`, `comment_time`) VALUES ( '$user', '$comment', '$id', current_timestamp());";
 
                     $result = mysqli_query($conn, $sql);
                 }
                 echo ' <form action="' . $_SERVER["REQUEST_URI"] . '" method="post">
                     <div class="mb-3">
-                        <label for="doubt" class="form-label">
-                            <strong> Doubt title </strong>
-                        </label>
-                        <input type="text" class="form-control" id="doubt_title" name="doubt_title"
-                            aria-describedby="emailHelp">
-                    </div>
-                    <div class="mb-3">
-                        <label for="description" class="form-label">Description</label>
-                        <input type="text" class="form-control" id="doubt_desc" name="doubt_desc">
+                        <label for="description" class="form-label">Comment</label>
+                        <input type="text" class="form-control" id="comment" name="comment">
                     </div>
                     <button type="submit" class="btn btn-success">Submit</button>
                 </form>';

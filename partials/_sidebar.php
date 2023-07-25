@@ -1,6 +1,4 @@
 <?php
-include 'partials/_login.php';
-include 'partials/_signup.php';
 echo '<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;
 height:100%; ">
     <a href="index.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
@@ -43,11 +41,8 @@ height:100%; ">
             <strong>Login</strong>
         </a>
         <ul class="dropdown-menu dropdown-menu-dark text-small shadow " aria-labelledby=" dropdownUser1">
-            <li> <button class="btn btn-outline-dark ml-4 text-white" style="margin-left:7px;" data-bs-toggle="modal"
-                    data-bs-target="#loginModal" type="submit">Login</button>
-
-            <button class="btn btn-outline-dark ml-2 text-white" data-bs-toggle="modal"
-                    data-bs-target="#SignupModal" type="submit">SignUp</button>
+        <li><a class="dropdown-item" href="LoginPage.php">Login</a></li>
+        <li><a class="dropdown-item" href="Signup.php">Sign Up</a></li>
             <li>
                 <hr class="dropdown-divider">
             </li>
