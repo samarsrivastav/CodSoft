@@ -43,7 +43,7 @@
 
 </head>
 
-<body>
+<body style="min-height: none;">
     <main>
         <div class="sidebar" style="
             height:100%; 
@@ -52,6 +52,7 @@
             left: 0; ">
             <?php
             include 'partials/_dbconnect.php';
+            session_start();
             include 'partials/_sidebar.php';
             ?>
         </div>
@@ -115,24 +116,28 @@
                 ?>
             </div>
 
-            <div class="queryform my-5" style="z-index:2">
-                <h2>Answer the following query</h2>
+            <div class="queryform my-5">
                 <?php
-                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    $id = $_GET['threadid'];
-                    $comment = $_POST['comment'];
-                    $user = "sukuna";
-                    $sql = "INSERT INTO `comment` (`username`, `comment`, `thread_id`, `comment_time`) VALUES ( '$user', '$comment', '$id', current_timestamp());";
+                if ($loggin) {
+                    echo '<h2>Answer the following query</h2>';
+                    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                        $id = $_GET['threadid'];
+                        $comment = $_POST['comment'];
+                        $user = $_SESSION['username'];
+                        $sql = "INSERT INTO `comment` (`username`, `comment`, `thread_id`, `comment_time`) VALUES ( '$user', '$comment', '$id', current_timestamp());";
 
-                    $result = mysqli_query($conn, $sql);
-                }
-                echo ' <form action="' . $_SERVER["REQUEST_URI"] . '" method="post">
+                        $result = mysqli_query($conn, $sql);
+                    }
+                    echo ' <form action="' . $_SERVER["REQUEST_URI"] . '" method="post">
                     <div class="mb-3">
                         <label for="description" class="form-label">Comment</label>
                         <input type="text" class="form-control" id="comment" name="comment">
                     </div>
                     <button type="submit" class="btn btn-success">Submit</button>
                 </form>';
+                } else {
+                    echo '<h2>Loggin to Answer</h2>';
+                }
                 ?>
             </div>
         </div>

@@ -59,6 +59,7 @@ include 'partials/_dbconnect.php';
             top: 0;
             left: 0; ">
             <?php
+            session_start();
             include 'partials/_sidebar.php';
             ?>
         </div>

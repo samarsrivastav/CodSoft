@@ -53,12 +53,27 @@
             top: 0;
             left: 0; ">
             <?php
+            session_start();
             include 'partials/_sidebar.php';
             ?>
         </div>
         <div class="container my-2" style=" width: 70%;
             position: absolute;
             margin: 308px; z-index: -1;">
+            <?php
+            if (isset($_GET['signup']) && $_GET['signup'] == true) {
+                echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>Success!!</strong> Account Created Successfully
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>';
+            }
+            if (isset($_GET['login']) && $_GET['login'] == true) {
+                echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>Success!!</strong> LoggedIn Successfully
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>';
+            }
+            ?>
             <!-- corousal -->
             <div id=" carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">

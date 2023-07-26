@@ -10,14 +10,15 @@
     <link rel="stylesheet" href="css/login.css">
 </head>
 
+
 <body>
     <form method="post" action="partials/_handlelogin.php">
         <div class="form-container">
             <h2>Login to Your Account</h2>
             <hr>
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="email" aria-describedby=" emailHelp" name="email">
+                <label for="exampleInputEmail1" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" aria-describedby=" emailHelp" name="username">
             </div>
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Password</label>
@@ -28,7 +29,7 @@
     </form>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
-        </script>
+    </script>
 </body>
 
 </html>

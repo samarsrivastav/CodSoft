@@ -52,6 +52,7 @@
             left: 0; ">
             <?php
             include 'partials/_dbconnect.php';
+            session_start();
             include 'partials/_sidebar.php';
             ?>
         </div>
@@ -117,19 +118,23 @@
                 }
                 ?>
             </div>
-
             <div class="queryform my-5">
-                <h2>Ask Your Queries here</h2>
                 <?php
-                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    $catid = $_GET['catid'];
-                    $title = $_POST['doubt_title'];
-                    $desc = $_POST['doubt_desc'];
-                    $sql = "INSERT INTO `threads` ( `username`, `thread_title`, `thread_desc`,`cat_id`,`thread_time`) VALUES ( 'JOJO', '$title', '$desc','$catid', current_timestamp());";
+                if ($loggin) {
+                    echo '
+                <h2>Ask Your Queries here</h2>';
 
-                    $result = mysqli_query($conn, $sql);
-                }
-                echo ' <form action="' . $_SERVER["REQUEST_URI"] . '" method="post">
+                    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                        $catid = $_GET['catid'];
+                        $title = $_POST['doubt_title'];
+                        $desc = $_POST['doubt_desc'];
+                        $username = $_SESSION['username'];
+                        $sql = "INSERT INTO `threads` ( `username`, `thread_title`, `thread_desc`,`cat_id`,`thread_time`) VALUES ( '
+                    $username', '$title', '$desc','$catid', current_timestamp());";
+
+                        $result = mysqli_query($conn, $sql);
+                    }
+                    echo ' <form action="' . $_SERVER["REQUEST_URI"] . '" method="post">
                     <div class="mb-3">
                         <label for="doubt" class="form-label">
                             <strong> Doubt title </strong>
@@ -143,6 +148,10 @@
                     </div>
                     <button type="submit" class="btn btn-success">Submit</button>
                 </form>';
+                } else {
+                    echo '
+                <h2>Loggin to Ask a Doubt</h2>';
+                }
                 ?>
             </div>
         </div>

@@ -1,4 +1,9 @@
 <?php
+if (!isset($_SESSION['loggin']) || $_SESSION['loggin'] == false) {
+    $loggin = false;
+} else {
+    $loggin = true;
+}
 echo '<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;
 height:100%; ">
     <a href="index.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
@@ -38,16 +43,22 @@ height:100%; ">
         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1"
             data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fa-solid fa-user rounded-circle me-2" width="32" height="32"></i>
-            <strong>Login</strong>
+            <strong>Account</strong>
         </a>
-        <ul class="dropdown-menu dropdown-menu-dark text-small shadow " aria-labelledby=" dropdownUser1">
+        <ul class="dropdown-menu dropdown-menu-dark text-small shadow " aria-labelledby=" dropdownUser1" style="width:250px; ">';
+if (!$loggin) {
+    echo '
         <li><a class="dropdown-item" href="LoginPage.php">Login</a></li>
-        <li><a class="dropdown-item" href="Signup.php">Sign Up</a></li>
-            <li>
-                <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" href="#">Sign out</a></li>
-        </ul>
+        <li><a class="dropdown-item" href="Signup.php">Sign Up</a></li>';
+} else if ($loggin) {
+    echo '
+        <li style="margin-left:10px";>Hello <span >'.$_SESSION['username'].'</span></li>
+        <li>
+            <hr class="dropdown-divider">
+        </li>
+            <li><a class="dropdown-item" href="logout.php">Sign out</a></li>';
+        }
+        echo'</ul>
     </div>
 </div>
 <div class="b-example-divider"></div>';
