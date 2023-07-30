@@ -84,6 +84,52 @@
             </div>
                     ';
             ?>
+            <div class="queryform my-5">
+                <?php
+                if ($loggin) {
+                    echo '
+                <h2>Ask Your Queries here</h2>';
+
+                    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                        $show = false;
+                        $catid = $_GET['catid'];
+                        $title = $_POST['doubt_title'];
+                        $desc = $_POST['doubt_desc'];
+                        $username = $_SESSION['username'];
+                        $sql = "INSERT INTO `threads` ( `username`, `thread_title`, `thread_desc`,`cat_id`,`thread_time`) VALUES ( '
+                       $username', '$title', '$desc','$catid', current_timestamp());";
+
+                        $result = mysqli_query($conn, $sql);
+                        if ($result) {
+                            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>Success!!</strong> Comment Added 
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                          </div>';
+
+                        } else {
+                            $show = "error!!";
+                        }
+                    }
+                    echo ' <form action="' . $_SERVER["REQUEST_URI"] . '" method="post">
+                    <div class="mb-3">
+                        <label for="doubt" class="form-label">
+                            <strong> Doubt title </strong>
+                        </label>
+                        <input type="text" class="form-control" id="doubt_title" name="doubt_title"
+                            aria-describedby="emailHelp">
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <input type="text" class="form-control" id="doubt_desc" name="doubt_desc">
+                    </div>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </form>';
+                } else {
+                    echo '
+                <h2>Loggin to Ask a Doubt</h2>';
+                }
+                ?>
+            </div>
             <div class="threads my-5">
                 <h2>Discussion </h2>
                 <?php
@@ -118,49 +164,14 @@
                 }
                 ?>
             </div>
-            <div class="queryform my-5">
-                <?php
-                if ($loggin) {
-                    echo '
-                <h2>Ask Your Queries here</h2>';
 
-                    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                        $catid = $_GET['catid'];
-                        $title = $_POST['doubt_title'];
-                        $desc = $_POST['doubt_desc'];
-                        $username = $_SESSION['username'];
-                        $sql = "INSERT INTO `threads` ( `username`, `thread_title`, `thread_desc`,`cat_id`,`thread_time`) VALUES ( '
-                    $username', '$title', '$desc','$catid', current_timestamp());";
-
-                        $result = mysqli_query($conn, $sql);
-                    }
-                    echo ' <form action="' . $_SERVER["REQUEST_URI"] . '" method="post">
-                    <div class="mb-3">
-                        <label for="doubt" class="form-label">
-                            <strong> Doubt title </strong>
-                        </label>
-                        <input type="text" class="form-control" id="doubt_title" name="doubt_title"
-                            aria-describedby="emailHelp">
-                    </div>
-                    <div class="mb-3">
-                        <label for="description" class="form-label">Description</label>
-                        <input type="text" class="form-control" id="doubt_desc" name="doubt_desc">
-                    </div>
-                    <button type="submit" class="btn btn-success">Submit</button>
-                </form>';
-                } else {
-                    echo '
-                <h2>Loggin to Ask a Doubt</h2>';
-                }
-                ?>
-            </div>
         </div>
         </div>
     </main>
     <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
-    <script src="/partials/sidebars.js"></script>
+    <script src="partials/sidebars.js"></script>
 </body>
 
 </html>

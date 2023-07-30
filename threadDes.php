@@ -43,7 +43,7 @@
 
 </head>
 
-<body style="min-height: none;">
+<body>
     <main>
         <div class="sidebar" style="
             height:100%; 
@@ -54,6 +54,7 @@
             include 'partials/_dbconnect.php';
             session_start();
             include 'partials/_sidebar.php';
+            
             ?>
         </div>
 
@@ -82,6 +83,43 @@
             </div>
                     ';
             ?>
+
+            <div class="queryform my-5">
+                <?php
+                if ($loggin) {
+                    $show=false;
+                    echo '<h2>Answer the following query</h2>';
+                    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                        $show=false;
+                        $id = $_GET['threadid'];
+                        $comment = $_POST['comment'];
+                        $user = $_SESSION['username'];
+                        $sql = "INSERT INTO `comment` (`username`, `comment`, `thread_id`, `comment_time`) VALUES ( '$user', '$comment', '$id', current_timestamp());";
+
+                        $result = mysqli_query($conn, $sql);
+                        if($result){
+                                echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Success!!</strong> Comment Added 
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                              </div>';
+                            
+                        }
+                        else{
+                            $show="error!!";
+                        }
+                    }
+                    echo ' <form action="' . $_SERVER["REQUEST_URI"] . '" method="post">
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Comment</label>
+                        <input type="text" class="form-control" id="comment" name="comment">
+                    </div>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </form>';
+                } else {
+                    echo '<h2>Login to Answer</h2>';
+                }
+                ?>
+            </div>
             <div class="threads my-5">
                 <h2>Discussion </h2>
                 <?php
@@ -116,37 +154,13 @@
                 ?>
             </div>
 
-            <div class="queryform my-5">
-                <?php
-                if ($loggin) {
-                    echo '<h2>Answer the following query</h2>';
-                    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                        $id = $_GET['threadid'];
-                        $comment = $_POST['comment'];
-                        $user = $_SESSION['username'];
-                        $sql = "INSERT INTO `comment` (`username`, `comment`, `thread_id`, `comment_time`) VALUES ( '$user', '$comment', '$id', current_timestamp());";
-
-                        $result = mysqli_query($conn, $sql);
-                    }
-                    echo ' <form action="' . $_SERVER["REQUEST_URI"] . '" method="post">
-                    <div class="mb-3">
-                        <label for="description" class="form-label">Comment</label>
-                        <input type="text" class="form-control" id="comment" name="comment">
-                    </div>
-                    <button type="submit" class="btn btn-success">Submit</button>
-                </form>';
-                } else {
-                    echo '<h2>Loggin to Answer</h2>';
-                }
-                ?>
-            </div>
         </div>
         </div>
     </main>
     <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
-    <script src="/partials/sidebars.js"></script>
+    <script src="partials/sidebars.js"></script>
 </body>
 
 </html>

@@ -39,60 +39,41 @@
     }
     </style>
 
-
-    <!-- Custom styles for this template -->
     <link rel="stylesheet" href="partials/sidebars.css">
+
 </head>
 
-<body style="background-color:rgb(219 218 218);">
-    <main style="max-width: 100%;">
-
+<body>
+    <main>
         <div class="sidebar" style="
             height:100%; 
             position:fixed;
             top: 0;
             left: 0; ">
             <?php
+            include 'partials/_dbconnect.php';
             session_start();
             include 'partials/_sidebar.php';
             ?>
         </div>
-        <div class="container my-2" style=" width: 70%;
-            position: absolute;
-            margin: 308px; z-index: -1;">
+
+        <div class=" container-1 my-2" style="position:absolute;margin:300px;">
             <?php
-            if (isset($_GET['signup']) && $_GET['signup'] == true) {
-                echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-  <strong>Success!!</strong> Account Created Successfully
-  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>';
-            }
-            if (isset($_GET['login']) && $_GET['login'] == true) {
-                echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-  <strong>Success!!</strong> LoggedIn Successfully
-  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>';
-            }
-            ?>
-            <!-- corousal -->
-            <div id=" carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="img/c-img.jpg" class="d-block w-100" alt="...">
-                    </div>
+            echo ' 
+            <div class="header" style="z-index: -1;">
+                <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-root-margin="0px 0px -40%"
+                    data-bs-smooth-scroll="true" class="scrollspy-example bg-light my-3 p-3 rounded-2" tabindex="0" style="border:7px solid black;">
+                    <h2 id="scrollspyHeading1">Contact page 
+                    </h2>
                 </div>
             </div>
-            <!-- corousal end -->
-            <!-- text heading -->
-            <h1 class="fs-2 my-2" style="position:relative; left:60px;">Have a discussion regarding Your College
-                Placements.
-            </h1>
+                    ';
+            ?>
         </div>
     </main>
     <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
-
     <script src="partials/sidebars.js"></script>
 </body>
 

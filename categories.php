@@ -92,7 +92,7 @@ include 'partials/_dbconnect.php';
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
 
-    <script src="/partials/sidebars.js"></script>
+    <script src="partials/sidebars.js"></script>
 </body>
 
 </html>
